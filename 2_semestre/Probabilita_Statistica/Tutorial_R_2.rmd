@@ -1,0 +1,185 @@
+---
+title: "Tutorial su R"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Funzioni in R
+
+Come prima cosa andiamo a vedere come si definiscono le funzioni in R.
+Non devo spiegarvi cosa siano le funzioni, ma basta farvi vedere come si costruiscono e come si invocano in R.
+```{r es_funzioni, echo=TRUE}
+my_fun <- function(x){
+  y <- 3*x+1
+  return(y)
+}
+x=12
+my_fun(1)
+my_fun(x)
+
+y <- 33
+Y <- my_fun(y)
+print(list(y=y,Y=Y))
+```
+
+Ci sono un po' di cose da dire:
+
+1. Una funzione vede quello che le passiamo e non modifica al di fuori. Vede anche gli argomenti dell'ambiente che l'ha chiamata *ma in seconda battuta*, solo se non ne ha con quel nome al suo interno (come parametri o definite). 
+2. Se non diamo esplicitamente un `return`, la funzione restituisce l'ultima riga.
+3. Abbiamo chiamato dentro la nostra funzione `*` e `+`. In generale possiamo chiamare altre funzioni, anche da noi definite.
+4. Possiamo usare `;` al posto di un a capo per separare gli statement, ad esempio
+
+```{r es_funzioni2, echo=TRUE}
+my_fun <- function(x){y <- 3*x+1; return(y);};my_fun(78)
+```
+### Esercizio 
+
+Scrivi ora una funzione di nome `new_fun` che prenda un parametro e che restituisca come valore la metà dell'input.
+
+```{r by-two, exercise=TRUE}
+
+```
+
+### Osservazioni
+Possiamo aggiungere commenti al nostro codice, (utile quando definiamo funzioni), facendoli precedere da `#`.
+
+Possiamo anche passare più argomenti e assegnare valori di default per essi:
+```{r , echo=TRUE}
+my_fun <- function(x,t=1){
+  # Non uso return, restituisce l'ultima riga di codice
+  3*x+t
+}
+
+my_fun(33)
+my_fun(33,1)
+my_fun(33,-98)
+```
+
+Che succede se passiamo alla funzione più di un valore, nella fattispecie, un vettore?
+
+```{r echo=TRUE}
+my_fun <- function(x,t=1){
+  3*x+t
+}
+z <- sample(1:50,10)
+my_fun(z)
+t <- c(1,2,3,4,5)
+my_fun(3,t)
+my_fun(z,t)
+```
+
+Sembra essere andato tutto bene, no? Ma cosa ci aspettavamo dall'ultima? Se ci aspettavamo i valori corrispondenti a tutte le possibili coppie $(z,t)$, abbiamo ottenuto qualcosa di diverso... Non c'è messaggio di errore, ma sappiamo che gli elementi del prodotto cartesiano dovrebbero essere $10\cdot 5=50$, mentre l'ultimo elenco ne conteneva solo 10.
+
+Quello che succede è il tipico comportamento di R: andando a sommare due vettori ($3\cdot z$ e $t$) ricicla quello più corto. Se avessimo preso $t$ di una lunghezza che non divideva $z$, avremmo avuto un messaggio di avviso.
+
+In generale, se vogliamo vettorializzare le nostre funzioni, abbiamo a disposizione il comando `sapply` (se invece vogliamo "listizzarle" abbiamo `lapply` e, più in generale, abbiamo `apply`). Vediamo solamente un rapido esempio:
+```{r, echo=TRUE}
+z <- sample(rnorm(10, mean=2, sd=3))
+z
+y <- sapply(z, my_fun)
+y
+w <- z+4*y
+lapply(list(z=z,y=y,w=w), mean)
+```
+
+
+
+## Condizioni
+La seconda cosa che vogliamo vedere sono `if` e `else`: la sintassi, in R, è la seguente:
+ * per cose brevi possiamo usare `ifelse()`: prende tre argomenti, il primo -`test`- è l'espressione logica da valutare, il secondo -`yes`- è il valore da restituire se il test è verificato, mentre il terzo -`no`- è quello da restituire altrimenti.
+ * per cose più complesse possiamo usare `if() else`:
+
+
+```{r ifelse, echo=TRUE}
+collatz <- function(x){
+  ifelse(x%%2==0,x/2,3*x+1)
+}
+
+collatz(6)
+collatz(3)
+
+collatz.2 <- function(x){
+  if(x!=1){
+    print(x)
+    x <- ifelse(x%%2==0,x/2,3*x+1)
+    return(collatz.2(x))
+  }
+  else
+    return(x) ## posso trascurare le graffe qui perché si tratta di una sola riga!
+}
+
+collatz.2(3)
+```
+Vediamo che possiamo chiamare una funzione ricorsivamente. In questi casi è bene assicurarsi che prima o poi si esca dalla ricorsione (in realtà dopo un po' R ci butta fuori). Per questa funzione si congettura (congettura di Collatz) che termini per tutti gli interi positivi, anche se questo fatto non è stato ancora completamente dimostrato.
+Ma nel definire la funzione abbiamo dato per scontato che gli fossero passati interi maggiori di 0, cosa che non è controllata da nessuna parte. Aggiungiamo allora un controllo:
+
+```{r, echo=TRUE}
+collatz.2 <- function(x){
+  stopifnot(x-as.integer(x)==0,x>0)
+  if(x!=1){
+    print(x)
+    x <- ifelse(x%%2==0,x/2,3*x+1)
+    return(collatz.2(x))
+  }
+  else
+    return(x)
+}
+
+# collatz.2(0) # questo restituirebbe errore. Provate ad eseguire il codice nel prossimo esercizio!
+# collatz.2(3.2) # anche questo dà errore, per stopifnot
+collatz.2(7)
+```
+
+
+### Esercizio
+Definisci una funzione `trig` che accetti due argomenti, `x` e `c` e con valore di default 11, e che restituisca una combinazione a piacere di funzioni trigonometriche di `x`, con parametro `c`. Aggiungi anche un controllo sul fatto che gli argomenti passati possano essere dati in pasto a funzioni trigonometriche.
+```{r assign3, exercise=TRUE, exercise.lines = 5}
+  
+```
+
+```{r}
+rm(list = ls())
+```
+## Grafica (minimale)
+R ha delle funzioni di grafica già nel codice base, che possono poi essere ampliate in modo notevole usando altri pacchetti (tra cui vale la pena segnalare `ggplot2`, che si inserisce nel più vasto `tidyverse` per il mondo dell'analisi dati).
+
+```{r, echo=TRUE}
+z <- sample(rnorm(20, mean=3, sd=3))
+results <- list(z=z, coll=sapply(z, function(x){3*x+1}))
+plot(results$z, results$coll, xlab="Z", ylab="Collatz")
+hist(results$coll)
+with(results, boxplot(z))
+```
+
+Possiamo anche generare tabelle dei nostri dati (categorici) con il comando `table` e le sue varianti. Ne vediamo qui un semplice esempio:
+```{r, echo=TRUE}
+results$r <- ifelse(results$z*rnorm(length(results$z)) < 0,'negative', "positive")
+results$r2 <- ifelse(results$coll*rnorm(length(results$coll)) < 0,'negative', "positive")
+with(results,table(r,r2))
+```
+
+```{r}
+rm(list = ls())
+```
+### Esercizio
+Prima di concludere questa breve introduzione, fai un ultimo esercizio.
+Con i dati forniti `x` (generati con una distribuzione di Poisson di media 4) crea una lista `dati` che abbia come elementi `x`, `y` ottenuto traslando `x` a sinistra di 4, `z` ottenuto elevando `y` al quadrato e sommandogli, membro a membro, il vettore `err` dato.
+A questo punto rappresenta graficamente `z` come funzione di `x` e, successivamente, come funzione di `y`.
+Crea una nuova variabile `xCat` nella lista `dati` che categorizza come "bassi" tutti i valori di `x` minori o uguali a 4 e come "alti" gli altri. Ancora, crea una variabile `zCat` in `dati` che categorizza come "buoni" tutti i valori minori o uguali a $\sqrt{13}$ (`sqrt(13)`) e "cattivi" altrimenti.
+Per concludere, metti in tabella `xCat` contro `yCat`.
+```{r vectors2, exercise=TRUE, exercise.lines = 5}
+  x <- rpois(40, lambda = 4)
+  err <- rnorm(40, mean = 0, sd = 2)
+```
+
+### Conclusioni
+In questo breve tutorial non abbiamo che grattato appena la superficie delle potenzialità di R. Per conoscerlo meglio possiamo sfruttare alcune risorse aggiuntive. In primo luogo l'help interno: possiamo chiamarlo da console con il comando `?` seguito dal nome della funzione, oppure con `??` seguito da una parola chiave.
+Online si trovano moltissime guide più o meno specializzate su vari aspetti di R. La maggior parte sono in inglese, ma non dovrebbe essere un problema. Un buon punto di partenza è [CRAN](https://cran.r-project.org/)
+Infine su [StackOverflow](https://stackoverflow.com/questions/tagged/r), su [CrossValidated](https://stats.stackexchange.com) e altre piattaforme online è possibile interagire con la comunità di coloro che usano R.
+Buon divertimento!
