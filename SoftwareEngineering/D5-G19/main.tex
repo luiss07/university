@@ -1,0 +1,61 @@
+\documentclass{report}
+
+\usepackage{verbatim}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[table]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage[shortlabels]{enumitem}
+\usepackage{wrapfig,hyperref,listings,amsfonts,makecell,enumerate,
+            array,graphicx,plain,setspace, multicol, caption,
+	        titlesec,blindtext,nameref,geometry}
+%\usepackage[export]{adjustbox} 
+\renewcommand{\arraystretch}{1.4}
+%\setlength{\cellspacetoplimit}{4pt}
+%\setlength{\cellspacebottomlimit}{4pt}
+
+\geometry{
+	paperheight = 29.7cm,
+	paperwidth = 21cm,
+	outer = 1.5cm,
+	inner = 2.5cm,
+	top = 2cm,
+	bottom = 2cm
+}
+\singlespacing
+
+% nessuna interruzione di pagina tra capitoli
+%\renewcommand{\cleardoublepage}{}
+%\renewcommand{\clearpage}{}
+
+% redefinizione del formato del titolo del capitolo
+%\titleformat{\chapter}
+%	{\normalfont\Huge\bfseries}{\thechapter}{1em}{}
+
+%------ chapter -----
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\normalfont\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+\titlespacing*{\chapter}{0pt}{-20pt}{40pt}
+
+\definecolor{Gray}{gray}{0.9}
+
+% -------- figure in multicols ----------
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+\begin{document}
+
+\input{Chapter/0paginaIniziale}
+\tableofcontents
+\input{Chapter/1UserStories}
+\input{Chapter/2Features}
+\input{Chapter/3UserFlows}
+\input{Chapter/4ApplicationImplementationAndDocumentation}
+\input{Chapter/5APIDocumentation}
+\input{Chapter/6FrontEndImplementation}
+\input{Chapter/7GitHubRepositoryInfo}
+\input{Chapter/8Testing}
+
+\end{document}

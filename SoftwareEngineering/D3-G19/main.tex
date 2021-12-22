@@ -1,0 +1,43 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[table]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage[shortlabels]{enumitem}
+\usepackage{wrapfig,hyperref,listings,amsfonts,makecell,enumerate,
+            array, cellspace,graphicx,plain,setspace,
+	        titlesec,blindtext,nameref,geometry}
+%\usepackage[export]{adjustbox} 
+\renewcommand{\arraystretch}{1.4}
+\setlength{\cellspacetoplimit}{4pt}
+\setlength{\cellspacebottomlimit}{4pt}
+
+\geometry{
+	paperheight = 29.7cm,
+	paperwidth = 21cm,
+	outer = 1.5cm,
+	inner = 2.5cm,
+	top = 2cm,
+	bottom = 2cm
+}
+\singlespacing
+
+%------ chapter -----
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+\titlespacing*{\chapter}{0pt}{-20pt}{40pt}
+
+\definecolor{Gray}{gray}{0.9}
+
+\begin{document}
+
+
+
+\include{Chapter/0paginaIniziale}
+\tableofcontents
+\include{Chapter/1AnalisiDiContesto}
+\include{Chapter/2AnalisiDeiComponenti}
+
+\end{document}

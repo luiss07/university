@@ -1,0 +1,15 @@
+\section{Obiettivi}
+Il progetto ha come obiettivo la realizzazione di un'applicazione compatibile con iOS e Android, in grado di gestire le prenotazioni dei parcheggi all’interno di un parcheggio di medio/grandi dimensioni registrati sull’applicazione.
+
+In dettaglio l’applicazione deve permettere, ad un utente registrato ed autenticato, di:
+
+\subsection{Cercare un parcheggio}
+    All’interno di una determinata zona, sul navigatore. L’applicazione mostra i parcheggi con \textbf{colori} diversi a seconda della \textbf{disponibilità} dei posti. L’utente può selezionare il parcheggio desiderato e \textbf{prenotare} un posto, pagando tramite carta di credito o wallet integrato nell'applicazione;
+\subsection{Gestire le prenotazioni}
+    Quando una prenotazione viene confermata dall’applicazione la \textbf{targa} della macchina viene inviata all'infrastruttura del parcheggio in modo da consentirne l’accesso al suo arrivo. Condizione necessaria per confermare la prenotazione è che sul wallet o sulla carta di credito \textbf{ci siano i soldi necessari};
+\subsection{Ingresso nel parcheggio}
+    Una volta arrivati al parcheggio la sbarra si alza automaticamente, in quanto una videocamera legge e controlla se sono state effettuate prenotazioni con una determinata targa;
+\subsection{Aggiungi parcheggi}
+    In particolare, se un utente è il \textbf{proprietario di un parcheggio} non registrato può richiedere il servizio compilando un form integrato nell’applicazione, dove dovrà indicare i dati del parcheggio: nome, via, numero civico, città, cap, posti disponibili e attestare la proprietà tramite un documento.
+    Una volta verificata l’autenticità dei dati sull’account dell’utente verranno attivate le funzionalità per gestire il parcheggio, tra cui: \textbf{analytics} e possibilità di \textbf{sospendere il servizio temporaneamente}. \newline\\
+Nel caso in cui un utente non registrato volesse richiedere l’attivazione del servizio, perché proprietario di un parcheggio, può indicarlo al momento della registrazione (compilando i campi indicati nel punto 4).

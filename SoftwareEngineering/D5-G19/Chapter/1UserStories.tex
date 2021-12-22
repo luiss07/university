@@ -1,0 +1,39 @@
+\chapter*{Scopo del documento}
+\addcontentsline{toc}{chapter}{Scopo del documento}
+Il documento presentato riporta tutte le informazioni necessarie per lo sviluppo dell'applicativo Sistema Monitoraggio Ambientale. In particolare, esso presenta tutti gli artefatti necessari per sviluppare le funzionalità dell'account di tipo Amministratore, definito nei precedenti documenti. Partendo dalla descrizione delle user stories, features ed user flow legate al ruolo di amministratore, il documento procede con la presentazione delle API necessarie per poter visualizzare, modificare ed inserire i dati dei sensori GPS utilizzati dall'applicazione. A seguire troveremo un capitolo  dove sarà possibile vedere come è stata pensata l'interfaccia utente, con l'obiettivo di essere la più semplice e chiara possibile.
+Per ogni API presentata, oltre alla descrizione delle funzionalità fornite, il documento presenta la documentazione ed i casi di test correlati.
+
+
+\chapter{User Stories}
+
+Una "User Story" è una descrizione informale e generica di una caratteristica del software presentata dal punto di vista dell'utente finale.\\
+Il punto focale di ogni User Story presentata nel documento viene posto sull'amministratore, ossia l'utente principale da noi selezionato per l'implementazione dell'applicazione. Esso è in grado sia di visualizzare i dati relativi al parco in termini di popolazione, dei rischi ambientali e delle descrizioni dei singoli animali, sia di gestire i sensori GPS dei singoli animali. \\
+Ogni User Story viene definita con un linguaggio non tecnico, volta a fornire allo sviluppatore un'idea del chi (Who?), cosa (What?) e del perchè(Why?) si sta sviluppando una specifica funzionalità del software.
+Le \textbf{User Stories} legate all'Amministratore dell'applicazione "Sistema di monitoraggio ambientale" sono riportate nella tabella seguente. Nel caso non sia presente un requisito funzionale o non funzionale, viene presentata una "X" ad indicare che non esiste tale correlazione.\\
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|m{0.05\linewidth}|m{0.38\linewidth}|m{0.20\linewidth}|m{0.25\linewidth}|}
+    \hline
+        & \textbf{Descrizione User Story} & \textbf{Requisiti funzionali} & \textbf{Requisiti non funzionali} \\
+        \hline
+        \rowcolor{Gray}
+        \textbf{US1} & Come amministratore voglio poter selezionare il parco in cui mi trovo, per vedere le informazioni di quest’ultimo & RF 2.1 &  X \\
+        \hline
+        \textbf{US2} & Come amministratore voglio poter visualizzare le specie di flora e fauna, per vedere le informazioni degli animali e delle piante & RF 2.1 & X \\
+        \hline
+        \rowcolor{Gray}
+        \textbf{US3} & Come amministratore voglio poter visualizzare le statistiche del parco in termini di pericolo ambientale così da poterlo tenere sotto controllo & RF 2.3 & RNF 3.3 \\
+        \hline
+        \textbf{US4} & Come amministratore voglio poter visualizzare, per la specie animale selezionata, un istogramma rappresentante la sua popolazione nel tempo e una mappa delle posizioni degli animali di quella specie in tempo reale, in modo da tenerli sotto controllo & X & RNF 2.5, RNF 3.3 \\
+        \hline
+        \rowcolor{Gray}
+        \textbf{US5} & Come amministratore, voglio essere in grado di selezionare un sensore GPS del parco per poi eliminarlo, in modo da poterlo gestire & RF 2.5 & X \\
+        \hline 
+        \textbf{US6} & Come amministratore, voglio essere in grado di aggiungere un sensore GPS nel parco, in modo da poterlo gestire & RF 2.5 & X \\
+        \hline
+        \rowcolor{Gray}
+        \textbf{US7} & Come amministratore, voglio essere in grado di selezionare un sensore GPS del parco per poi visualizzarne i dati, in modo da poter ottenere informazioni sul singolo elemento & RF 2.5 & X \\
+        \hline
+    \end{tabular}
+\end{table}
