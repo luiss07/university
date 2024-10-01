@@ -13,15 +13,17 @@ use crate::classes as basedir;
 use basedir::c01_basic as c1;
 use basedir::c02_ownership as c2;
 use basedir::c03_enums as c3;
-/*use basedir::c04_structs as c4;
+use basedir::c04_structs as c4;
 use basedir::c05_modules as c5;
-use basedir::c06_testing as c6;
-use basedir::c07b_maps as cm;
-use basedir::c09_traits as c9;
-use basedir::c10_OOP as c10;
-use basedir::c11_heap as c11;
-use basedir::c12_fp as c12;
-use basedir::c99_QA as cqa;*/
+// use basedir::c06_testing as c6;
+use basedir::c07_lifetimes as c7;
+use basedir::c08_traits as c8;
+// use basedir::c07b_maps as cm;
+// use basedir::c09_traits as c9;
+// use basedir::c10_OOP as c10;
+// use basedir::c11_heap as c11;
+// use basedir::c12_fp as c12;
+// use basedir::c99_QA as cqa;
 
 // Below is the main function.
 // Notice that CLion already knows we can run it (see the green triangle)
@@ -69,6 +71,9 @@ pub fn main() {
         // // open c06_testing
         //
         // // open c07_project
+
+        c7::nll();
+        c8::struct_generic();
 
         // // c_07b_maps
         // cm::singlemap();
