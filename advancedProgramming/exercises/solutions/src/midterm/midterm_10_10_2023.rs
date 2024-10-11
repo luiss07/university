@@ -1,7 +1,7 @@
 use std::cmp::PartialEq;
-use crate::midterm::midterm_10_10_2023::A::{A1, A2};
-use crate::midterm::midterm_10_10_2023::B::{B1, B2};
-use crate::midterm::midterm_10_10_2023::F::F1;
+// use crate::midterm::midterm_10_10_2023::A::{A1, A2};
+// use crate::midterm::midterm_10_10_2023::B::{B1, B2};
+// use crate::midterm::midterm_10_10_2023::F::F1;
 
 pub enum A {
     A2(char, char),
@@ -16,14 +16,12 @@ pub enum B {
 
 pub fn bforma(a : A) -> B {
     match a {
-        A2(c1, c2) => {
-            B1(c1 as i32, c2 as i32)
-        },
+        A2(c1, c2) => B1(c1 as i32, c2 as i32),
         A1(i1, i2, i3) => {
-            //let s = String::from(i1.to_string() + "-" + &i2.to_string() + "-" + &i3.to_string());
-            //B2(s)
+            // let s = String::from(i1.to_string() + "-" + &i2.to_string() + "-" + &i3.to_string());
+            B2(String::from(i1.to_string() + "-" + &i2.to_string() + "-" + &i3.to_string()))
             // option 2
-            B2(format!("{}-{}-{}", i1, i2, i3))
+            // B2(format!("{}-{}-{}", i1, i2, i3))
         }
     }
 }
@@ -175,4 +173,100 @@ pub fn swapstr(mut x: X, mut y : Y) -> (X, Y) {
     x.s = y.c;
     y.c = tmp;
     (x,y)
+}
+
+// es 15
+#[derive(Debug)]
+pub struct L {
+    pub s : String,
+    pub n : i32
+}
+
+#[derive(Debug)]
+pub struct M {
+    pub s : String,
+    pub n : f64
+}
+
+impl L {
+    pub fn new() -> L {
+        L{s:"hello".to_string(), n:0}
+    }
+
+    pub fn new_with_params(s : String, n : i32) -> L {
+        L{s, n}
+    }
+}
+
+// es 15
+impl M {
+    pub fn new() -> M {
+        M{s:"hello".to_string(), n:0.0}
+    }
+
+    pub fn new_with_params(s : String, n : f64) -> M {
+        M{s, n}
+    }
+}
+
+pub fn swap_string(l: &mut L, m : &mut M){
+    let s = replace(&mut l.s, m.s.clone());
+    m.s = s;
+}
+
+// es 16
+pub fn neighbour(vs : &Vec<String>, i : usize) -> Result<String, ()> {
+    if i == vs.len()-1 {
+        return Err(())
+    };
+
+    Ok(vs[i].clone() + &vs[i+1].clone())
+}
+
+
+// es 17
+pub fn removeelement(vo : &mut Vec<Option<i32>>) {
+    for i in 0..vo.len()-1 {
+        match vo[i] {
+            Some(elem) => {
+                if ( elem % 2 ) != 0 {
+                    vo.remove(i);
+                    return
+                }
+            },
+            None => {
+                vo.remove(i);
+                return
+            }
+        }
+    }
+}
+use std::collections::HashMap;
+use std::hash::Hash;
+use crate::midterm::midterm_10_10_2023::A::{A1, A2};
+use crate::midterm::midterm_10_10_2023::B::{B1, B2};
+use crate::midterm::midterm_10_10_2023::F::F1;
+
+// es 18
+pub fn hashandhash(h1 : &mut HashMap<i32, String>, h2 : &mut HashMap<String, i32>) {
+    let mut vs = Vec::new();
+    for (s , i) in h2.iter_mut() {
+        if h1.contains_key(&(s.len() as i32)) {
+            vs.push(s.clone());
+        }
+    }
+
+    for s in vs {
+        h2.remove(&s);
+    }
+}
+
+// es 19
+pub fn unique(mut h1 : HashMap<i32, String>, l : i32) -> Option<HashMap<i32, String>> {
+    if h1.values().any(|v| v.len() == l as usize) {
+        return None;
+    } else {
+        h1.insert(h1.len() as i32, "X".repeat(l as usize));
+    }
+    Some(h1)
 }

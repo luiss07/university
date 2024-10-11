@@ -7,6 +7,7 @@ use assignments::sheet1 as s1;
 use assignments::sheet2 as s2;
 use assignments::sheet3 as s3;
 use midterm::midterm_10_10_2023 as mt1;
+use midterm::midterm_11_10_2022_v1 as mt2;
 
 
 fn sheet1() {
@@ -204,18 +205,18 @@ fn sheet3() {
 
 }
 
-// 1 no x is moved
-// 2 error
-// 3 20 20
-// 4 return 8
-// 5 yes
-// 6 error passing array as non mutable
-// 7 yes
-// 8 yes
 
 fn midterm_10_10_2023() {
 
-    // es 1
+    // 1 no x is moved
+    // 2 error
+    // 3 20 20
+    // 4 return 8
+    // 5 yes
+    // 6 error passing array as non mutable
+    // 7 No, v is moved at line 2, and can't be used at line 3
+
+    // es 9
     let a1 = mt1::A::A1(1,2,3);
     let a2 = mt1::A::A2('a','b');
     println!("B2: {:?}, B1:{:?}", mt1::bforma(a1), mt1::bforma(a2));
@@ -223,7 +224,7 @@ fn midterm_10_10_2023() {
     let a2 = mt1::A::A2('t','z');
     println!("B2: {:?}, B1:{:?}", mt1::bforma(a1), mt1::bforma(a2));
 
-    // es 2
+    // es 10
     let e1 = mt1::E::A("hello".to_string());
     let e2 = mt1::E::B(true);
     println!("{:?} {:?}", e1, e1.count_vowels());
@@ -236,11 +237,11 @@ fn midterm_10_10_2023() {
     println!("{:?} {:?}", f2, f2.calculation());
     println!("{:?} {:?}", f3, f3.calculation());
 
-    // es 3
+    // es 11
     mt1::print_n(Some(3));
     mt1::print_n(None);
 
-    // es 4
+    // es 12
     let b = mt1::Balance{amt:100,active:true};
     let b2 = mt1::Balance{amt:200,active:true};
     println!("maybericher {:?}", b.maybericher(b2));
@@ -257,12 +258,12 @@ fn midterm_10_10_2023() {
     let b2 = mt1::Balance{amt:200,active:false};
     println!("maybericher {:?}", b.maybericher(b2));
 
-    // es 5
+    // es 13
     let g = mt1::G::new(4, 2);
     let result = g.square();
     println!("{:?}", result);
 
-    // es 6
+    // es 14
     let mut x = mt1::X::new();
     let mut y = mt1::Y::new();
     println!("X {:?} - Y {:?}", x, y);
@@ -272,6 +273,204 @@ fn midterm_10_10_2023() {
     let z2 = y.getstr();
     println!("{},{},{},{}",z1,z2,x.s,y.c);
 
+    // es 15
+    let l = mt1::L::new();
+    let m = mt1::M::new();
+    println!("{:?} {:?}",l,m);
+
+    let l = mt1::L::new_with_params("world".to_string(), 10);
+    let m = mt1::M::new_with_params("world".to_string(), 10.0);
+    println!("{:?} {:?}",l,m);
+
+    let mut l = mt1::L::new_with_params("world".to_string(), 10);
+    let mut m = mt1::M::new_with_params("hello".to_string(), 10.0);
+    mt1::swap_string(&mut l, &mut m);
+    println!("{:?} {:?}",l,m);
+
+    // es 16
+    let v = vec!["hello".to_string(), "world".to_string(), "how".to_string(), "are".to_string(), "you".to_string()];
+    let result = mt1::neighbour(&v, 0);
+    println!("{:?}",result);
+
+    let v = vec!["hello".to_string(), "world".to_string(), "how".to_string(), "are".to_string(), "you".to_string()];
+    let result = mt1::neighbour(&v, 3);
+    println!("{:?}",result);
+
+    let v = vec!["hello".to_string(), "world".to_string(), "how".to_string(), "are".to_string(), "you".to_string()];
+    let result = mt1::neighbour(&v, 4);
+    println!("{:?}",result);
+
+    // es 17
+    let mut v = vec![Some(1),Some(2),None,Some(3)];
+    mt1::removeelement(&mut v);
+    println!("{:?}",v);
+
+    let mut v = vec![None,Some(2),None, None, Some(5)];
+    mt1::removeelement(&mut v);
+    println!("{:?}",v);
+
+    //es 18
+    use std::fmt::Debug;
+    fn makehashmap()->HashMap<i32,String>{
+        let mut h = HashMap::new();
+        h.insert(3,"what1".to_string());
+        h.insert(4,"what2".to_string());
+        h.insert(1,"what3".to_string());
+        h.insert(6,"what4".to_string());
+        h.insert(22,"what78".to_string());
+        return h;
+    }
+    fn deterministicprinter<T,U>(h:&HashMap<T,U>) where T :
+    Debug + Ord, U : Debug + Ord{
+        let mut v : Vec<(&T,&U)> = h.iter().collect();
+        v.sort();
+        println!("{:?}",v);
+    }
+
+    let mut h2: HashMap<String,i32> = HashMap::new();
+    let mut h1 = makehashmap();
+    h2.insert("w".to_string(), 2);
+    h2.insert("wh".to_string(), 4);
+    h2.insert("wha".to_string(), 1);
+    h2.insert("what".to_string(), 8);
+    h2.insert("what1".to_string(), 3);
+    deterministicprinter(&h1);
+    deterministicprinter(&h2);
+    mt1::hashandhash(&mut h1,&mut h2);
+    deterministicprinter(&h1);
+    deterministicprinter(&h2);
+
+    let mut h2: HashMap<String,i32> = HashMap::new();
+    let mut h1 = makehashmap();
+    h2.insert("whoooooooooooooooooooo".to_string(), 2);
+    h2.insert("whoo".to_string(), 4);
+    h2.insert("who".to_string(), 1);
+    h2.insert("whoooo".to_string(), 8);
+    h2.insert("wheeeee".to_string(), 2);
+    deterministicprinter(&h1);
+    deterministicprinter(&h2);
+    mt1::hashandhash(&mut h1,&mut h2);
+    deterministicprinter(&h1);
+    deterministicprinter(&h2);
+
+    // es 19
+    fn makehashmap2()->HashMap<i32,String>{
+        let mut h = HashMap::new();
+        h.insert(2,"what1".to_string());
+        h.insert(4,"what2".to_string());
+        h.insert(1,"what3".to_string());
+        h.insert(5,"what".to_string());
+        return h;
+    }
+    fn deterministicprinter2<T,U>(h:&HashMap<T,U>) where T : Debug + Ord,
+                                                        U : Debug + Ord{
+        let mut v : Vec<(&T,&U)> = h.iter().collect();
+        v.sort();
+        println!("{:?}",v);
+
+    }
+
+    let mut h1 = makehashmap2();
+    deterministicprinter2(&h1);
+    let ret = mt1::unique(h1, 5);
+    println!("{:?}",ret);
+    let mut h1 = makehashmap2();
+    deterministicprinter2(&h1);
+    let ret = mt1::unique(h1, 2).unwrap();
+    deterministicprinter2(&ret);
+}
+
+fn midterm_11_10_2022() {
+    // 1 no, x is moved
+    // 2 error
+    // 3 error (cannot mutate the owner while it is &mut by another variable)
+    // 4 error
+    // 5 error
+    // 6 100
+    // 7 z
+    // 8 error
+
+    // es 9
+    let xx1 = mt2::XX::Y1(2,3);
+    println!("data {}",mt2::data(&xx1));
+    let xx1 = mt2::XX::Y2(String::from("test"));
+    println!("data {}",mt2::data(&xx1));
+
+    // es 10
+    let z1 = mt2::Z::Y1(1,2);
+    let z2 = mt2::Z::Y2(true,String::from("new"));
+    println!("len {:?}", mt2::maybelength(&z1));
+    println!("len {:?}", mt2::maybelength(&z2));
+
+    // es 11
+    let ex = mt2::enumx::X::Y(String::from("test"));
+    let sx = mt2::structx::X{i:String::from("asd")};
+    println!("Longer {}", mt2::modfun::longer(&ex,&sx));
+    let ex = mt2::enumx::X::Y(String::from("asdasd"));
+    println!("Longer {}", mt2::modfun::longer(&ex,&sx));
+
+    // es 12
+    println!("Maybesqrt 4 {:?} ", mt2::maybesqrt(4));
+    println!("Maybesqrt -4 {:?} ", mt2::maybesqrt(-4));
+
+    // es 13
+    let b = mt2::Balance{amt:100};
+    println!("maybewith {:?}", b.maybewithdraw(10));
+    println!("maybewith {:?}", b.maybewithdraw(200));
+
+    // es 14
+    println!("char {}, prev {}", 'c', mt2::prevchar('c'));
+    println!("char {}, prev {}", 'a', mt2::prevchar('a'));
+    println!("char {}, prev {}", 'z', mt2::prevchar('z'));
+    let mut s = String::from("Pign");
+    println!("S {}",s);
+    let ret = mt2::replwithprev(&mut s);
+    println!("Returned: {:?}",ret);
+    let mut s = String::from("pigna");
+    println!("S {}",s);
+    let ret = mt2::replwithprev(&mut s);
+    println!("Returned: {:?}",ret);
+
+    // es 15
+    let x = mt2::X::new();
+    let y = mt2::Y::new();
+    println!("X {:?} - Y {:?}", x, y);
+    let (x,y) = mt2::swapstr(x,y);
+    println!("X {} - Y {}", x, y);
+
+    // es 16
+    let c1 = mt2::C::C1(0,1);
+    let c2 = mt2::C::C2(true, String::from("no way jose"));
+    println!("gotten {:?}",mt2::D::new());
+    let d1 = mt2::D::new_with_c(c1);
+    println!("dbg {:?}",d1);
+    println!("fmt D: {}",d1);
+    let d2 = mt2::D::new_with_c(c2);
+    println!("dbg {:?}",d2);
+    println!("fmt D: {}",d2);
+    println!("larger {}",d1.larger());
+    println!("larger {}",d2.larger());
+
+    // es 17
+    let mut my_vec = vec!["a".to_string(), "b".to_string(), "c".to_string()];
+
+    // Swapping and concatenating elements at indices 0 and 1
+    if let Some(v) = mt2::swapelconcat(&mut my_vec, 0, 1) {
+        println!("Mutated vector: {:?}", v);
+    } else {
+        println!("Invalid indices");
+    }
+
+    // es 18
+    let mut v1 = vec![String::from("ab");4];
+    println!("Lengths {:?}", mt2::veclengths(&v1));
+
+    // es 19
+    let mut v: Vec<String> = vec![String::from("what");4];
+    v.push(String::from("now"));    v.push(String::from("what"));
+    println!("{:?}",v);
+    mt2::removeelfromvector(&mut v, 3);
+    println!("{:?}",v);
 }
 
 
@@ -281,6 +480,6 @@ fn main() {
     // sheet2();
     // sheet3();
 
-    midterm_10_10_2023();
-
+    // midterm_10_10_2023();
+    midterm_11_10_2022();
 }

@@ -309,8 +309,17 @@ pub fn example_notify(){
     notify_fn(&t);
     notify_bound(&t);
     // DNC: error[E0277]: `Tweet` doesn't implement `std::fmt::Display`
-    notify_fn2(&t, &t);
-    notify_bound2(&t, &t);
+    // notify_fn2(&t, &t);
+    // notify_bound2(&t, &t);
+
+    let n = NewsArticle{
+        headline: "Wasps!".to_string(),
+        location: "Povo".to_string(),
+        author: "Patrignani".to_string(),
+        content: "there is a wasp in my attic".to_string()
+    };
+    // notify_fn2(&t, &n); // this work because the fn is expecting any type that implements the Summary + Display
+    // notify_bound2(&t, &n); // this do not work because the bound expects the SAME time as generic
 }
 
 impl Display for Tweet {
@@ -319,6 +328,14 @@ impl Display for Tweet {
         Ok(())
     }
 }
+
+impl Display for NewsArticle {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        format!("");
+        Ok(())
+    }
+}
+
 
 // If you have really fancy trait bounds for your types,
 // you function signature will be very very long. T
