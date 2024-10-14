@@ -411,6 +411,7 @@ fn some_function_where<T, U>(t: &T, u: &U) -> i32
 // a virtual method table, often just called a vtable,
 //  which contains, for each method of SomeTrait and its supertraits that T implements,
 //  a pointer to T's implementation (i.e. a function pointer).
+// the abovep process is called Dynamic dispatch
 
 // The purpose of trait objects is to permit "late binding" of methods.
 // Calling a method on a trait object results in virtual dispatch at runtime:
