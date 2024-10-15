@@ -594,7 +594,7 @@ struct ST;
 impl T for ST {
     type Item = i32;
     const C: i32 = 9;
-    fn new() -> Self {           // `Self` is the type `S`.
+    fn new() -> Self {           // `Self` is the type `ST`.
         ST
     }
     fn f(&self) -> Self::Item {  // `Self::Item` is the type `i32`.

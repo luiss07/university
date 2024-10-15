@@ -20,7 +20,7 @@ use basedir::c07_lifetimes as c7;
 use basedir::c08_traits as c8;
 // use basedir::c07b_maps as cm;
 // use basedir::c09_traits as c9;
-// use basedir::c10_OOP as c10;
+use basedir::c10_OOP as c10;
 // use basedir::c11_heap as c11;
 // use basedir::c12_fp as c12;
 // use basedir::c99_QA as cqa;
@@ -96,7 +96,7 @@ pub fn main() {
         // // c9::example_supertraits();
         //
         // // c10_oop
-        // c10::example_oop1();
+        c10::example_oop1();
         // c10::example_animals_oop();
         // c10::example_multiple_traits();
         //
