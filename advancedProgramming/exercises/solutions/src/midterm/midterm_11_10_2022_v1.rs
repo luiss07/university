@@ -239,3 +239,96 @@ pub fn removeelfromvector(vs : &mut Vec<String>, n : usize) {
         }
     }
 }
+
+pub fn midterm_11_10_2022() {
+    // 1 no, x is moved
+    // 2 error
+    // 3 error (cannot mutate the owner while it is &mut by another variable)
+    // 4 error
+    // 5 error
+    // 6 100
+    // 7 z
+    // 8 error
+
+    // es 9
+    let xx1 = XX::Y1(2, 3);
+    println!("data {}", data(&xx1));
+    let xx1 = XX::Y2(String::from("test"));
+    println!("data {}", data(&xx1));
+
+    // es 10
+    let z1 = Z::Y1(1, 2);
+    let z2 = Z::Y2(true, String::from("new"));
+    println!("len {:?}", maybelength(&z1));
+    println!("len {:?}", maybelength(&z2));
+
+    // es 11
+    let ex = enumx::X::Y(String::from("test"));
+    let sx = structx::X{i:String::from("asd")};
+    println!("Longer {}", modfun::longer(&ex, &sx));
+    let ex = enumx::X::Y(String::from("asdasd"));
+    println!("Longer {}", modfun::longer(&ex, &sx));
+
+    // es 12
+    println!("Maybesqrt 4 {:?} ", maybesqrt(4));
+    println!("Maybesqrt -4 {:?} ", maybesqrt(-4));
+
+    // es 13
+    let b = Balance{amt:100};
+    println!("maybewith {:?}", b.maybewithdraw(10));
+    println!("maybewith {:?}", b.maybewithdraw(200));
+
+    // es 14
+    println!("char {}, prev {}", 'c', prevchar('c'));
+    println!("char {}, prev {}", 'a', prevchar('a'));
+    println!("char {}, prev {}", 'z', prevchar('z'));
+    let mut s = String::from("Pign");
+    println!("S {}",s);
+    let ret = replwithprev(&mut s);
+    println!("Returned: {:?}",ret);
+    let mut s = String::from("pigna");
+    println!("S {}",s);
+    let ret = replwithprev(&mut s);
+    println!("Returned: {:?}",ret);
+
+    // es 15
+    let x = X::new();
+    let y = Y::new();
+    println!("X {:?} - Y {:?}", x, y);
+    let (x,y) = swapstr(x, y);
+    println!("X {} - Y {}", x, y);
+
+    // es 16
+    let c1 = C1(0, 1);
+    let c2 = C2(true, String::from("no way jose"));
+    println!("gotten {:?}", D::new());
+    let d1 = D::new_with_c(c1);
+    println!("dbg {:?}",d1);
+    println!("fmt D: {}",d1);
+    let d2 = D::new_with_c(c2);
+    println!("dbg {:?}",d2);
+    println!("fmt D: {}",d2);
+    println!("larger {}",d1.larger());
+    println!("larger {}",d2.larger());
+
+    // es 17
+    let mut my_vec = vec!["a".to_string(), "b".to_string(), "c".to_string()];
+
+    // Swapping and concatenating elements at indices 0 and 1
+    if let Some(v) = swapelconcat(&mut my_vec, 0, 1) {
+        println!("Mutated vector: {:?}", v);
+    } else {
+        println!("Invalid indices");
+    }
+
+    // es 18
+    let mut v1 = vec![String::from("ab");4];
+    println!("Lengths {:?}", veclengths(&v1));
+
+    // es 19
+    let mut v: Vec<String> = vec![String::from("what");4];
+    v.push(String::from("now"));    v.push(String::from("what"));
+    println!("{:?}",v);
+    removeelfromvector(&mut v, 3);
+    println!("{:?}",v);
+}

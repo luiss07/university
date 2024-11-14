@@ -26,3 +26,6 @@ tasks.json
 # Ignore compiled C file 
 *.out
 # Ignore files without extensions (for binaries)
+
+# Other folders
+ex2_parziale/

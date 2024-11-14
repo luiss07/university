@@ -52,3 +52,13 @@ pub fn transpose(mat : ((u32, u32), (u32, u32))) -> ((u32, u32), (u32, u32)) {
     transposed_mat
 }
 
+pub fn sheet1() {
+    // SHEET 1 EXERCISES
+    println!("{}", string_reverse_2("ciao"));
+
+    let mut str = String::from("prova");
+    let str2 = append(str.clone());
+    println!("{}, {}", str, str2);
+    println!("{}", is_armstrong_2(10));
+    println!("original: {:?} and transposed {:?}", ((1,2), (3,4)), crate::assignments::sheet1::transpose(((1, 2), (3, 4))))
+}

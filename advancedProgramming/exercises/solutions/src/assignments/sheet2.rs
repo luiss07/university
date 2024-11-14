@@ -230,3 +230,68 @@ enum Expression {
 // pub fn evaluate_expression(ex : Expression) -> Result<i32, String> {
 //
 // }
+
+pub fn sheet2() {
+    // SHEET 2 EXERCISES
+
+    let mut v = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let ( slice1, slice2 ) = v.split_at_mut(5);
+    println!("{:?}, {:?}", slice1, slice2);
+    modify_odd(slice1);
+    println!("vector {:?}", v);
+
+    println!("hash map {:?}", count_character("aaabbbccc"));
+
+    let mut v:Vec<i32> = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let ( slice1, slice2 ) = v.split_at_mut(5);
+    println!("{:?}", split_at_value(slice1, 10).unwrap_or((&[0], &[0])));
+
+    sub_slice(&v, &vec![2, 3, 4]);
+
+    let v = vec![5,2,7,20,4,5,0,34];
+    println!("{:?}", max_iter(&v).unwrap_or(0));
+    println!("{:?}", max_rec(&v).unwrap_or(0));
+
+    let mut v_sort:Vec<i32> = vec![1, 2, 3, 4, 5, 6, 7, 8,9];
+    println!("{:?}", is_sorted_rec(&v));
+    println!("{:?}", is_sorted_rec(&v_sort));
+
+    let mut vs = vec!["test".to_string()];
+    insert_if_longer(&mut vs, "test".to_string());
+    println!("{:?}", vs);
+    insert_if_longer(&mut vs, "ciaociaociao".to_string());
+    println!("{:?}", vs);
+
+    let mut v = vec![5,2,7,20,4,5,0,34];
+    println!("{:?}", build_vector(v.iter()));
+
+    pancake_sort(&mut v);
+    println!("{:?}", v);
+
+    println!("{:?}", merge_split(&[1,3,5,7,9,11], &[2,4,6,8,10,12]));
+    println!("{:?}", merge_split(&[1,3,5,7,9,11], &[10,12,12,14,16,18]));
+
+    enum DoubleType {
+        T1(i32),
+        T2(String)
+    }
+
+    let v_i32_str = vec![DoubleType::T1(1), DoubleType::T2("string".to_string())];
+
+    enum Operation {
+        Add,
+        Sub,
+        Mul,
+        Div
+    }
+
+    enum Expression {
+        Number(i32),
+        Operation {
+            left : Box<Expression>,
+            right : Box<Expression>,
+            op : Operation
+        }
+    }
+
+}

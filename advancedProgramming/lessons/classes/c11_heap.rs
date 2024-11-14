@@ -464,19 +464,19 @@ struct NaiveRc<T> {
     inner_value: T,
 }
 
-impl<T: Copy> Clone for NaiveRc<T> {
-    fn clone(&self) -> Self {
-        // QUIZ: does this code compile?
-        // Y | N
-        // self.reference_count += 1;
-        // DNC: error[E0594]: cannot assign to `self.reference_count`, which is behind a `&` reference
-        // The problem is: clone takes an immutable reference to self, so the reference count can’t be mutated!
-        return NaiveRc {
-            reference_count: self.reference_count,
-            inner_value: self.inner_value.clone(),
-        };
-    }
-}
+// impl<T: Copy> Clone for NaiveRc<T> {
+//     fn clone(&self) -> Self {
+//         // QUIZ: does this code compile?
+//         // Y | N
+//         // self.reference_count += 1;
+//         // DNC: error[E0594]: cannot assign to `self.reference_count`, which is behind a `&` reference
+//         // The problem is: clone takes an immutable reference to self, so the reference count can’t be mutated!
+//         return NaiveRc {
+//             reference_count: self.reference_count,
+//             inner_value: self.inner_value.clone(),
+//         };
+//     }
+// }
 impl<T: Copy> NaiveRc<T> {
     //We could implement a special, differently-named cloning function that takes &mut self,
     // but that is awful for usability
@@ -484,10 +484,10 @@ impl<T: Copy> NaiveRc<T> {
     // and forces the user of our API to always declare mutable instances of that type
     fn clone_mut(&mut self) -> Self {
         self.reference_count += 1;
-        return NaiveRc {
+        NaiveRc {
             reference_count: self.reference_count,
             inner_value: self.inner_value.clone(),
-        };
+        }
     }
 }
 // We also know that the reference counted wrappers in the standard library
